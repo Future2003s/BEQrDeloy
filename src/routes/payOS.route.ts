@@ -4,7 +4,7 @@ import PayOS from '@payos/node'
 import prisma from '@/database'
 import { OrderStatus } from '@/constants/type'
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
-import envConfig from '@/config'
+import envConfig, { API_URL } from '@/config'
 
 // Khởi tạo PayOS SDK
 const payOS = new PayOS(
@@ -13,7 +13,7 @@ const payOS = new PayOS(
   envConfig.PAYOS_CHECKSUM_KEY || '1f878caf651e4376d654e7d8f806d4914eed38d819b4e36e8ee75b2b8f071fd4'
 )
 
-const YOUR_DOMAIN = envConfig.FRONTEND_DOMAIN || `http://localhost:3000`
+const YOUR_DOMAIN = envConfig.IS_PRODUCTION ? API_URL : `http://localhost:3000`
 const MANAGER_ROOM_NAME = 'ManagerRoom'
 
 // Interfaces
